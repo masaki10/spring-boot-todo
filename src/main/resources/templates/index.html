@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>SpringTodoList</title>
+    <style type="text/css">
+    <!--
+    .allTodoContainer {display: flex;}
+    -->
+    </style>
+</head>
+<body>
+    <form method="post" th:action="@{/new}">
+        <input type="text" name="content"/>
+        <input type="submit" value="追加" />
+    </form>
+    <h2>All Todo</h2>
+    <div class="allTodoContainer" th:each="todo : ${allTodo}">
+        <form method="post" th:action="@{/update}" >
+            <input type="hidden" name="id" th:value="${todo.id}" />
+            <input type="text" name="content"th:value="${todo.content}" />
+            <input type="submit" value="更新" />
+        </form>
+        <form method="post" th:action="@{/delete}">
+            <input type="hidden" name="todoId" th:value="${todo.id}" />
+            <input type="submit" value="完了" />
+        </form>
+    </div>
+</body>
+
+</html>
